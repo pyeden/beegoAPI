@@ -116,3 +116,11 @@ func (u *UserController) Logout() {
 	u.Data["json"] = "logout success"
 	u.ServeJSON()
 }
+
+
+//code
+func (u *UserController) GetCode() {
+	code := models.GetCode()
+	u.Data["json"] = code
+	u.ServeJSON()
+}
