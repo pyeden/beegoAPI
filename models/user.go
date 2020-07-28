@@ -12,7 +12,16 @@ var (
 
 func init() {
 	UserList = make(map[string]*User)
-	u := User{"user_11111", "astaxie", "11111", Profile{"male", 20, "Singapore", "astaxie@gmail.com"}}
+	u := User{
+		"user_11111",
+		"astaxie",
+		"11111",
+		Profile{
+			"male",
+			20,
+			"Singapore",
+			"astaxie@gmail.com"}}
+
 	UserList["user_11111"] = &u
 }
 
@@ -28,6 +37,11 @@ type Profile struct {
 	Age     int
 	Address string
 	Email   string
+}
+
+type PhoneCode struct {
+	Status  int       `json:"status"`
+	Message string    `json:"message"`
 }
 
 func AddUser(u User) string {
@@ -83,4 +97,14 @@ func Login(username, password string) bool {
 
 func DeleteUser(uid string) {
 	delete(UserList, uid)
+}
+
+
+func GetCode() PhoneCode {
+	c := PhoneCode{
+		Status:  200,
+		Message: "123456",
+	}
+	return c
+
 }
