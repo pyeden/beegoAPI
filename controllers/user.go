@@ -3,6 +3,7 @@ package controllers
 import (
 	"beegoAPI/models"
 	"encoding/json"
+	"fmt"
 
 	"github.com/astaxie/beego"
 )
@@ -98,6 +99,11 @@ func (u *UserController) Delete() {
 // @Failure 403 user not exist
 // @router /login [get]
 func (u *UserController) Login() {
+	fmt.Println(u.Ctx)
+	fmt.Println(u.Ctx.Request)
+	fmt.Println(u.Ctx.Input)
+	fmt.Println(u.Ctx.Input.RequestBody)
+	fmt.Println(u.Ctx.Input.GetData("username"))
 	username := u.GetString("username")
 	password := u.GetString("password")
 	if models.Login(username, password) {
