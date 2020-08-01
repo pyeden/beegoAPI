@@ -95,6 +95,13 @@ func Login(username, password string) bool {
 	return false
 }
 
+
+func Register(username, password string) string {
+	data := username + password
+	return data
+}
+
+
 func DeleteUser(uid string) {
 	delete(UserList, uid)
 }

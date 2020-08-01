@@ -97,7 +97,7 @@ func (u *UserController) Delete() {
 // @Param	password		query 	string	true		"The password for login"
 // @Success 200 {string} login success
 // @Failure 403 user not exist
-// @router /login [get]
+// @router /login [post]
 func (u *UserController) Login() {
 	fmt.Println(u.Ctx)
 	fmt.Println(u.Ctx.Request)
@@ -114,7 +114,7 @@ func (u *UserController) Login() {
 	u.ServeJSON()
 }
 
-// @Title logout
+// @Title Logout
 // @Description Logs out current logged in user session
 // @Success 200 {string} logout success
 // @router /logout [get]
@@ -124,9 +124,34 @@ func (u *UserController) Logout() {
 }
 
 
-//code
+// @Title GetCode
+// @Description Logs out current logged in user session
+// @Success 200 {string} get code success
+// @router /getcode [post]
 func (u *UserController) GetCode() {
 	code := models.GetCode()
 	u.Data["json"] = code
+	u.ServeJSON()
+}
+
+
+// @Title Register
+// @Description 用户注册
+// @Param	username		query 	string	true		"The username for Register"
+// @Param	password		query 	string	true		"The password for Register"
+// @Success 200 {string} Register success
+// @Failure 403 user not exist
+// @router /register [post]
+func (u *UserController) Register() {
+	fmt.Println(u.Ctx)
+	fmt.Println(u.Ctx.Request)
+	fmt.Println(u.Ctx.Input)
+	fmt.Println(u.Ctx.Input.RequestBody)
+	fmt.Println(u.Ctx.Input.GetData("username"))
+	username := u.GetString("username")
+	password := u.GetString("password")
+	fmt.Println("username------------",username)
+	fmt.Println("password------------",password)
+	u.Data["json"] = "register success" + models.Register(username, password)
 	u.ServeJSON()
 }
